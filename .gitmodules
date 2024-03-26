@@ -1,0 +1,6 @@
+[submodule "ambrosia-app"]
+	path = ambrosia-app
+	url = https://github.com/zldobbs/ambrosia-app
+[submodule "ambrosia-server"]
+	path = ambrosia-server
+	url = https://github.com/zldobbs/ambrosia-server

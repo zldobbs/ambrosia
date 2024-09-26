@@ -1,0 +1,16 @@
+services:
+  # TODO: frontend; create image for ambrosia-app
+  # TODO: backend; create image for ambrosia-server
+  database:
+    # TODO: Copy db/*.sql files into container
+    image: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./ambrosia-server/database:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_DB=ambrosia
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=localhost
+      - POSTGRES_PORT=5432

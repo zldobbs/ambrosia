@@ -1,6 +1,6 @@
 [submodule "ambrosia-app"]
 	path = ambrosia-app
-	url = ssh://git@github.com:zldobbs/ambrosia-app.git
+	url = git@github.com:zldobbs/ambrosia-app.git
 [submodule "ambrosia-server"]
 	path = ambrosia-server
-	url = ssh://git@github.com:zldobbs/ambrosia-server.git
+	url = git@github.com:zldobbs/ambrosia-server.git

@@ -1,5 +1,25 @@
 services:
-  # TODO: frontend; create image for ambrosia-app
+  # NOTE: The frontend is currently configured to just run the 'web' app
+  #       This also does not support fast-reload, recommended to develop with `yarn ios|android|web` directly.
+  #       Maybe this is just an issue on Windows...?
+  frontend:
+    image: ambrosia/frontend
+    build: ./ambrosia-app
+    volumes:
+      - ./ambrosia-app:/usr/src/ambrosia-app:delegated
+      - /usr/src/ambrosia-app/node_modules
+    ports:
+      - "19000:19000"  # Expo dev tools port
+      - "19001:19001"  # React Native app connection
+      - "19002:19002"  # WebSocket debugger connection
+      - "19006:19006"  # Expo Web
+      - "8081:8081"    # Metro bundler port for web
+    environment:
+      - BACKEND_URL=http://backend:8080
+    depends_on:
+      backend:
+        condition: service_started
+        restart: true
   backend:
     image: ambrosia/backend
     build: ./ambrosia-server
@@ -29,7 +49,7 @@ services:
       - POSTGRES_PASSWORD=postgres
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
-      interval: 30s
-      timeout: 10s
+      interval: 10s
+      timeout: 3s
       retries: 5
       start_period: 5s

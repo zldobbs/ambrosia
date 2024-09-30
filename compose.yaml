@@ -5,8 +5,9 @@ services:
   frontend:
     image: ambrosia/frontend
     build: ./ambrosia-app
+    profiles: ["frontend"]
     volumes:
-      - ./ambrosia-app:/usr/src/ambrosia-app:delegated
+      - ./ambrosia-app:/usr/src/ambrosia-app
       - /usr/src/ambrosia-app/node_modules
     ports:
       - "19000:19000"  # Expo dev tools port

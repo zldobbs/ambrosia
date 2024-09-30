@@ -9,11 +9,13 @@ Monorepo collection of all ambrosia services
 
 `docker compose up --build` will (re)build the backend and launch the database.
 
-This is all that is necessary to get the entire application up and running.
+To additionally build and launch the frontend, use `docker compose --profile frontend up --build`.
 
 > NOTE: The frontend container is configured to run via the "web" bundler by default.
 > This bundler is also not configured for fast-refresh (at least on Windows).
 > Development and other emulators should be manually targetted separately for the frontend (e.g. `yarn ios`).
+
+This is all that is necessary to get the entire application up and running.
 
 > NOTE: The first launch of this server will require manually running SQL scripts to initialize the database.
 > Refer to the [database](#database) section for more information.
@@ -32,3 +34,9 @@ If launched via Docker Compose, follow these steps to finish first-time database
 
 > NOTE: The sql scripts should only need to be ran once.
 > Should investigate automating these as part of docker compose.
+
+## TODO
+
+- Debug current connections on Android/IOS emulators
+- Pretty things up
+- Users

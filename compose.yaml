@@ -3,12 +3,13 @@ services:
   #       This also does not support fast-reload, recommended to develop with `yarn ios|android|web` directly.
   #       Maybe this is just an issue on Windows...?
   frontend:
-    image: ambrosia/frontend
+    # image: ambrosia/frontend
     build: ./ambrosia-app
     profiles: ["frontend"]
     volumes:
       - ./ambrosia-app:/usr/src/ambrosia-app
-      - /usr/src/ambrosia-app/node_modules
+      # FIXME: volume never gets update when the node modules themselves are updated
+      # - /usr/src/ambrosia-app/node_modules
     ports:
       - "19000:19000"  # Expo dev tools port
       - "19001:19001"  # React Native app connection
@@ -22,7 +23,7 @@ services:
         condition: service_started
         restart: true
   backend:
-    image: ambrosia/backend
+    # image: ambrosia/backend
     build: ./ambrosia-server
     ports:
       - "8080:8080"

@@ -15,6 +15,9 @@ To additionally build and launch the frontend, use `docker compose --profile fro
 > This bundler is also not configured for fast-refresh (at least on Windows).
 > Development and other emulators should be manually targetted separately for the frontend (e.g. `yarn ios`).
 
+The frontend container uses an anonymous volume to store the node_modules directory.
+If the npm dependencies change, the volume will need to either be rebuilt or a manual installation within a running container will be required.
+
 This is all that is necessary to get the entire application up and running.
 
 > NOTE: The first launch of this server will require manually running SQL scripts to initialize the database.
@@ -34,9 +37,3 @@ If launched via Docker Compose, follow these steps to finish first-time database
 
 > NOTE: The sql scripts should only need to be ran once.
 > Should investigate automating these as part of docker compose.
-
-## TODO
-
-- Debug current connections on Android/IOS emulators
-- Pretty things up
-- Users

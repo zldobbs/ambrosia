@@ -37,9 +37,6 @@ If launched via Docker Compose, follow these steps to finish first-time database
 
 ## TODO
 
-- Need to initialize/seed Postgres DB
-- Fix up the node_modules volume issue (not being updated since it is a volume not used during build)
 - Debug current connections on Android/IOS emulators
-  - Using ARG in docker compose
 - Pretty things up
 - Users

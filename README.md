@@ -37,20 +37,3 @@ If launched via Docker Compose, follow these steps to finish first-time database
 
 > NOTE: The sql scripts should only need to be ran once.
 > Should investigate automating these as part of docker compose.
-
-## Issues
-
-- See all TODOs
-
-### Android
-
-- Back button doesn't work
-- Header logo doesn't display
-- VirtualizedLists should never be nested inside plain ScrollViews with the same orientation because it can break windowing and other functionality - use another Virtualized-backed container instead.
-
-### IOS
-
-- Header logo doesn't display
-- Back button is cut up text, not back arrow icon
-- VirtualizedLists should never be nested inside plain ScrollViews with the same orientation because it can break windowing and other functionality - use another Virtualized-backed container instead.
-- SDK version running by Expo seems outdated (see 50 here, my iPhone expects 51)

@@ -1,0 +1,59 @@
+services:
+  # NOTE: The frontend is currently configured to just run the 'web' app
+  #       This also does not support fast-reload, recommended to develop with `yarn ios|android|web` directly.
+  #       Maybe this is just an issue on Windows...?
+  frontend:
+    build:
+      context: ./ambrosia-app
+      args:
+        # TODO: Android and ios platforms are not supported, should be separate tags really.
+        PLATFORM: web
+    profiles: ["frontend"]
+    volumes:
+      - ./ambrosia-app:/usr/src/ambrosia-app
+      - /usr/src/ambrosia-app/node_modules
+    ports:
+      - "19000:19000"  # Expo dev tools port
+      - "19001:19001"  # React Native app connection
+      - "19002:19002"  # WebSocket debugger connection
+      - "19006:19006"  # Expo Web
+      - "8081:8081"    # Metro bundler port for web
+    environment:
+      - BACKEND_URL=http://backend:8080
+    depends_on:
+      backend:
+        condition: service_started
+        restart: true
+  backend:
+    build:
+      context: ./ambrosia-server
+    ports:
+      - "8080:8080"
+    environment:
+      - AMBORSIA_BACKEND_PORT=8080
+      - POSTGRES_DB=ambrosia
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=database
+      - POSTGRES_PORT=5432
+    depends_on:
+      database:
+        condition: service_healthy
+        restart: true
+  database:
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./ambrosia-server/database:/var/lib/postgresql/data"
+      - "./ambrosia-server/db/sql:/var/lib/ambrosia/db/sql"
+    environment:
+      - POSTGRES_DB=ambrosia
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s

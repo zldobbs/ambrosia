@@ -46,10 +46,7 @@ services:
       - "5432:5432"
     volumes:
       - "./ambrosia-server/database:/var/lib/postgresql/data"
-      - "./ambrosia-server/db:/var/lib/ambrosia/db"
     environment:
-      - POSTGRES_HOST=localhost
-      - POSTGRES_PORT=5432
       - POSTGRES_DB=ambrosia
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

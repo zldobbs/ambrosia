@@ -27,13 +27,24 @@ This is all that is necessary to get the entire application up and running.
 
 Using [PostgreSQL](https://www.postgresql.org).
 
-If launched via Docker Compose, follow these steps to finish first-time database setup:
+### Migrations
 
-- Connect to running container with a bash terminal: `docker exec -it ambrosia-database-1 bash`
-- Run each of the sql scripts to initialize and seed the database:
-  - `cd /var/lib/ambrosia/db/sql`
-  - `psql -U postgres -f initialize.sql`
-  - `psql -U postgres -f seed.sql`
+Apply any new migrations to the server using the [apply_migrations.sh script](./ambrosia-server/db/apply_migrations.sh).
 
-> NOTE: The sql scripts should only need to be ran once.
-> Should investigate automating these as part of docker compose.
+```sh
+docker compose run backend /ambrosia-server/db/apply_migrations.sh
+```
+
+> NOTE: Command may not work if ran from Git Bash. Try CMD/PowerShell if errors occur.
+
+### Seeding Database
+
+Apply initial data to the database:
+
+```sh
+docker compose run backend psql -U postgres -p postgres -f /ambrosia-server/db/sql/seed.sql
+```
+
+Adjust as necessary based on user credentials.
+
+> NOTE: Command may not work if ran from Git Bash. Try CMD/PowerShell if errors occur.

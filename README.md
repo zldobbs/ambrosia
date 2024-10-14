@@ -42,7 +42,7 @@ docker compose run backend /ambrosia-server/db/apply_migrations.sh
 Apply initial data to the database:
 
 ```sh
-docker compose run backend psql -U postgres -p postgres -f /ambrosia-server/db/sql/seed.sql
+docker compose run backend psql -U postgres -f /ambrosia-server/db/sql/seed.sql
 ```
 
 Adjust as necessary based on user credentials.

@@ -46,7 +46,6 @@ services:
       - "5432:5432"
     volumes:
       - "./ambrosia-server/database:/var/lib/postgresql/data"
-      - "./ambrosia-server/db/sql:/var/lib/ambrosia/db/sql"
     environment:
       - POSTGRES_DB=ambrosia
       - POSTGRES_USER=postgres
